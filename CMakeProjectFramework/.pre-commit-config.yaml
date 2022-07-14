@@ -1,0 +1,10 @@
+fail_fast: false
+
+repos:
+-   repo: https://gitee.com/huzhenhong/pre-commit-hooks-cpp-simple
+    rev: master
+    hooks:
+    -   id: clang-format
+        args: [--style=file]
+    # -   id: cpplint
+    # -   id: cppcheck

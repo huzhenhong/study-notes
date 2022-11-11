@@ -1,0 +1,9 @@
+.idea
+.vscode/settings.json
+.DS_Store
+build*
+debug
+install
+config/*Config.cmake
+config/*ConfigVersion.cmake
+.cache

@@ -11,7 +11,7 @@
 #include "argutil.h"
 #include <iostream>
 #include "common/ExportMarco.h"
-#include "FileSink.h"
+// #include "FileSink.h"
 
 
 // define FMTLOG_BLOCK=1 if log statment should be blocked when queue is full, instead of discarding the msg
@@ -50,7 +50,7 @@ class fmtlog
     static void                     preallocate() noexcept;
 
     // Set the file for logging
-    // static void                     setLogFile(const char* filename, bool truncate = false);
+    static void                     setLogFile(const char* filename, bool truncate = false);
 
     // Set an existing FILE* for logging, if manageFp is false fmtlog will not buffer log internally
     // and will not close the FILE*
@@ -123,9 +123,9 @@ class fmtlog
 
     static inline bool              checkLogLevel(LogLevel logLevel) noexcept;
 
-    // Run a polling thread in the background with a polling interval
+    // Run a polling thread in the background with a polling interval  in ns
     // Note that user must not call poll() himself when the thread is running
-    static void                     startPollingThread(int64_t pollInterval = 1000000) noexcept;
+    static void                     startPollingThread(int64_t pollInterval = 1000'000'000) noexcept;
 
     // Stop the polling thread
     static void                     stopPollingThread() noexcept;
@@ -221,12 +221,12 @@ class fmtlog
     }
 
   private:
-    volatile LogLevel      currentLogLevel = INF;
-    std::shared_ptr<ISink> m_fileSinkSptr  = nullptr;
+    volatile LogLevel currentLogLevel = INF;
+    // std::shared_ptr<ISink> m_fileSinkSptr  = nullptr;
 };
 
 
-struct LIBRARY_API fmtlogWrapper
+struct FMTLOG_API fmtlogWrapper
 {
     // C++11 后定义static变量多线程安全, 本质上来说应该是原子操作
     static fmtlog impl;  // 只是内部声明(并未分配内存), 所以需要外部再次定义(分配内存)

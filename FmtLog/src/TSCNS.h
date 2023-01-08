@@ -68,7 +68,7 @@ class TimeStampCounter
 #elif defined(__i386__) || defined(__x86_64__) || defined(__amd64__)
         return __builtin_ia32_rdtsc();
 #else
-        return rdsysns();
+        return Rdsysns();
 #endif
     }
 

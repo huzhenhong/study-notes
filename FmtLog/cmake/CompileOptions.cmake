@@ -59,8 +59,9 @@ elseif(USE_CXX_COMPILER MATCHES "GNU")
     #         -ftest-coverage
     #     >)
 
-    string(REPLACE "-O2" "-O0" CMAKE_CXX_FLAGS_RELWITHDEBINFO ${CMAKE_CXX_FLAGS_RELWITHDEBINFO})
-    # add_compile_options(-O0)
+    # string(REPLACE "-O2" "-O0" CMAKE_CXX_FLAGS_RELWITHDEBINFO ${CMAKE_CXX_FLAGS_RELWITHDEBINFO})
+    add_compile_options(-O0)
+    message("CMAKE_CXX_FLAGS_DEBUG: ${CMAKE_CXX_FLAGS_DEBUG}")
 elseif(USE_CXX_COMPILER MATCHES "Clang")
     message("- configure Clang compile option")
     # add_compile_options(
@@ -68,8 +69,11 @@ elseif(USE_CXX_COMPILER MATCHES "Clang")
     #         -Wpedantic
     #         -Wreturn-stack-address          # gives false positives
     # >)b
-    # add_compile_options(-O0)
+    add_compile_options(-O0)
     # add_compile_options(-g)
+    message("CMAKE_CXX_FLAGS_DEBUG: ${CMAKE_CXX_FLAGS_DEBUG}")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0")
+    message("CMAKE_CXX_FLAGS_DEBUG: ${CMAKE_CXX_FLAGS_DEBUG}")
 endif()
 
 # message("CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")

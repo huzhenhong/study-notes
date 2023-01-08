@@ -7,18 +7,16 @@ foreach(TEST_SRC ${TEST_SRC_LIST})
     message(STATUS "添加测试程序:${TEST_EXE_NAME}")
     
     add_executable(${TEST_EXE_NAME} ${TEST_SRC})
-    # target_include_directories(${TEST_EXE_NAME} 
-    #     PRIVATE
-    #         ${CMAKE_CURRENT_SOURCE_DIR}
-    #     )
+    target_include_directories(${TEST_EXE_NAME} 
+        PRIVATE
+            ../src
+        )
 
     message("CMAKE_ARCHIVE_OUTPUT_DIRECTORY: " ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
     target_link_directories(${TEST_EXE_NAME}
         PRIVATE
             ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}
         )
-
-    message("PROJECT_NAME: " ${PROJECT_NAME})
 
     target_link_libraries(${TEST_EXE_NAME} 
         PRIVATE 

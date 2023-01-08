@@ -4,7 +4,7 @@
  * Author       : huzhenhong
  * Date         : 2022-10-19 11:00:55
  * LastEditors  : huzhenhong
- * LastEditTime : 2022-10-26 10:20:40
+ * LastEditTime : 2023-01-06 20:00:24
  * FilePath     : \\FmtLog\\src\\FileSink.h
  * Copyright (C) 2022 huzhenhong. All rights reserved.
  *************************************************************************************/
@@ -16,7 +16,10 @@
 class FileSink : public ISink
 {
   public:
-    FileSink() {}
+    FileSink(const char* filename, bool truncate)
+    {
+        Open(filename, truncate);
+    }
 
     ~FileSink() {}
 
@@ -122,6 +125,7 @@ class FileSink : public ISink
     FILE*                                 m_outputFp      = nullptr;
     bool                                  m_isManageFp    = false;
     size_t                                m_fpos          = 0;  // file position of membuf, used only when manageFp == true
-    int64_t                               m_flushDelay    = 3000'000'000;
+    // int64_t                               m_flushDelay    = 3000'000'000; // ns
+    int64_t                               m_flushDelay    = 30'000'000;  // ns
     int64_t                               m_nextFlushTime = (std::numeric_limits<int64_t>::max)();
 };

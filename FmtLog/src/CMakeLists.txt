@@ -7,8 +7,8 @@ message("\n------------------ Start generate : ${Target} ------------------")
 aux_source_directory(fmt fmt_SRCS)
 FILE(GLOB_RECURSE SRCS CONFIGURE_DEPENDS *.h *.c *.hpp *.cpp)
 
-message("src: ${SRCS}")
-message("fmt_SRCS: ${fmt_SRCS}")
+# message("src: ${SRCS}")
+# message("fmt_SRCS: ${fmt_SRCS}")
 
 # foreach(src ${SRCS})
 #     message("src: ${SRCS}")

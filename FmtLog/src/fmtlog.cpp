@@ -11,30 +11,30 @@ fmtlog::fmtlog()
 {
     std::cout << "fmtlog()\n";
     // setLogFile(stdout);
-    m_fileSinkSptr = std::make_shared<FileSink>();
+    // m_fileSinkSptr = std::make_shared<FileSink>("fmtlog.txt", true);
 
-    // fmtlogDetailWrapper::impl.logCB = std::bind(&fmtlog::LogCB,
-    //                                             this,
-    //                                             std::placeholders::_1,
-    //                                             std::placeholders::_2,
-    //                                             std::placeholders::_3,
-    //                                             std::placeholders::_4,
-    //                                             std::placeholders::_5,
-    //                                             std::placeholders::_6,
-    //                                             std::placeholders::_7);
+    // // fmtlogDetailWrapper::impl.logCB = std::bind(&fmtlog::LogCB,
+    // //                                             this,
+    // //                                             std::placeholders::_1,
+    // //                                             std::placeholders::_2,
+    // //                                             std::placeholders::_3,
+    // //                                             std::placeholders::_4,
+    // //                                             std::placeholders::_5,
+    // //                                             std::placeholders::_6,
+    // //                                             std::placeholders::_7);
 
-    fmtlogDetailWrapper::impl.logCB = [m_fileSinkSptr = m_fileSinkSptr](int64_t          ns,
-                                                                        LogLevel         level,
-                                                                        fmt::string_view location,
-                                                                        size_t           basePos,
-                                                                        fmt::string_view threadName,
-                                                                        fmt::string_view msg,
-                                                                        size_t           bodyPos /* ,
-                                                                         size_t           logFilePos */
-                                      )
-    {
-        m_fileSinkSptr->Sink(LogLevel(), msg);
-    };
+    // fmtlogDetailWrapper::impl.logCB = [m_fileSinkSptr = m_fileSinkSptr](int64_t          ns,
+    //                                                                     LogLevel         level,
+    //                                                                     fmt::string_view location,
+    //                                                                     size_t           basePos,
+    //                                                                     fmt::string_view threadName,
+    //                                                                     fmt::string_view msg,
+    //                                                                     size_t           bodyPos /* ,
+    //                                                                      size_t           logFilePos */
+    //                                   )
+    // {
+    //     m_fileSinkSptr->Sink(level, msg);
+    // };
 }
 
 
@@ -83,23 +83,24 @@ LogLevel fmtlog::getLogLevel() noexcept
 // #endif
 // }
 
-// void fmtlog::setLogFile(const char* filename, bool truncate)
-// {
-//     m_fileSinkSptr
-//     auto& d     = fmtlogDetailWrapper::impl;
-//     FILE* newFp = fopen(filename, truncate ? "w" : "a");
-//     if (!newFp)
-//     {
-//         std::string err = fmt::format("Unable to open file: {}: {}", filename, strerror(errno));
-//         fmt::detail::throw_format_error(err.c_str());
-//     }
-//     setbuf(newFp, nullptr);
-//     d.m_fpos = ftell(newFp);
+void fmtlog::setLogFile(const char* filename, bool truncate)
+{
+    fmtlogDetailWrapper::impl.setLogFile(filename, truncate);
+    // m_fileSinkSptr
+    // auto& d     = fmtlogDetailWrapper::impl;
+    // FILE* newFp = fopen(filename, truncate ? "w" : "a");
+    // if (!newFp)
+    // {
+    //     std::string err = fmt::format("Unable to open file: {}: {}", filename, strerror(errno));
+    //     fmt::detail::throw_format_error(err.c_str());
+    // }
+    // setbuf(newFp, nullptr);
+    // d.m_fpos = ftell(newFp);
 
-//     closeLogFile();
-//     d.m_outputFp   = newFp;
-//     d.m_isManageFp = true;
-// }
+    // closeLogFile();
+    // d.m_outputFp   = newFp;
+    // d.m_isManageFp = true;
+}
 
 
 // void fmtlog::setLogFile(FILE* fp, bool manageFp)

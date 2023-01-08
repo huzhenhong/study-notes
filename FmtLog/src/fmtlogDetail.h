@@ -4,7 +4,7 @@
  * Author       : huzhenhong
  * Date         : 2022-08-09 13:56:46
  * LastEditors  : huzhenhong
- * LastEditTime : 2022-10-26 10:18:42
+ * LastEditTime : 2023-01-06 19:53:11
  * FilePath     : \\FmtLog\\src\\fmtlogDetail.h
  * Copyright (C) 2022 huzhenhong. All rights reserved.
  *************************************************************************************/
@@ -16,6 +16,7 @@
 #include "StaticLogInfo.h"
 #include "SPSCVarQueueOPT.h"
 #include <iostream>
+#include "FileSink.h"
 
 
 #ifdef _WIN32
@@ -82,6 +83,7 @@ class fmtlogDetail
     void                     handleLog(fmt::string_view threadName, const SpScVarQueue::MsgHeader* header);
     void                     adjustHeap(size_t i);
     void                     poll(bool forceFlush);
+    void                     setLogFile(const char* filename, bool truncate = false);
 
     template<size_t I, typename T>
     inline void setArg(const T& arg)
@@ -136,6 +138,7 @@ class fmtlogDetail
     volatile bool                                           m_isThreadRunning = false;
     std::thread                                             m_thr;
     static FAST_THREAD_LOCAL ThreadBuffer*                  m_pThreadBuffer;  // __thread 时只能修饰static成员变量
+    std::shared_ptr<ISink>                                  m_fileSinkSptr = nullptr;
 };
 
 

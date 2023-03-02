@@ -1,0 +1,5 @@
+add_executable(fmt_enc_dec fmt_enc_dec.cpp fmtutil.h)
+target_include_directories(fmt_enc_dec PRIVATE ${CMAKE_SOURCE_DIR}/3rdparty)
+
+add_executable(fmt_enc_dec_complex fmt_enc_dec_complex.cpp fmtutil.h)
+target_include_directories(fmt_enc_dec_complex PRIVATE ${CMAKE_SOURCE_DIR}/3rdparty)

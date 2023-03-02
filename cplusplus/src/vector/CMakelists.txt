@@ -1,0 +1,2 @@
+set(target vector)
+add_executable(${target} vector.cpp)

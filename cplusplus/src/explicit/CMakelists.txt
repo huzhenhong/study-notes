@@ -1,0 +1,2 @@
+set(target explicit)
+add_executable(${target} explicit.cpp)

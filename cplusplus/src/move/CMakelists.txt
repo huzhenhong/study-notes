@@ -1,0 +1,2 @@
+set(target move)
+add_executable(${target} move.cpp)
